@@ -101,4 +101,12 @@ RSpec.describe "Merchant Dashboard" do
     end
   end
 
+  it "displays a link to view all discounts" do
+    visit merchant_dashboard_index_path(@merch)
+
+    expect(page).to have_link("My Discounts")
+    click_link "My Discounts"
+
+    expect(current_path).to eq(merchant_bulk_discounts_path(@merch))
+  end
 end
