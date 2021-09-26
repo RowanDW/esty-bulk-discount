@@ -1,3 +1,7 @@
+<%= render partial: "layouts/merchant_header", locals: {merchant: @merchant} %>
+
+<h1>Create new bulk discount</h1>
+
 <%= form_with model: [@merchant, BulkDiscount.new], method: :post, local: true do |f| %>
   <%= f.label :percentage, "Percentage" %><br/>
   <%= f.number_field :percentage %><br/>

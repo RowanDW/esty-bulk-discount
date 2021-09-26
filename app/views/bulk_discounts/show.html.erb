@@ -1,0 +1,5 @@
+<%= render partial: "layouts/merchant_header", locals: {merchant: @merchant} %>
+
+<h1>Bulk Discount <%= @discount.id %> </h1>
+
+<h3><%= @discount.percentage %>% off <%= @discount.quantity %> items</h3>
