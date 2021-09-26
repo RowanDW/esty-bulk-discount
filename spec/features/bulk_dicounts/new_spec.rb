@@ -34,6 +34,6 @@ RSpec.describe "the bulk discounts new page" do
     click_button "Submit"
 
     expect(current_path).to eq(new_merchant_bulk_discount_path(@merch1))
-    expect(page).to have_content("Error: please fill in all fields")
+    expect(page).to have_content("Error: invalid discount, please try again")
   end
 end
