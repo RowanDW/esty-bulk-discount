@@ -12,7 +12,8 @@ RSpec.describe "the bulk discounts index page" do
 
   it "displays the discount attributes" do
     visit merchant_bulk_discount_path(@merch1, @discounts[0])
-    expect(page).to have_content("Discount #{@discounts[0].id}: ")
+
+    expect(page).to have_content("Discount #{@discounts[0].id}")
     expect(page).to have_content("#{@discounts[0].percentage}% off ")
     expect(page).to have_content("#{@discounts[0].quantity} items")
 
