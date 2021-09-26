@@ -29,6 +29,24 @@ class BulkDiscountsController < ApplicationController
     redirect_to merchant_bulk_discounts_path(params[:merchant_id])
   end
 
+  def edit
+    @merchant = Merchant.find(params[:merchant_id])
+    @discount = BulkDiscount.find(params[:id])
+  end
+
+  def update
+    @merchant = Merchant.find(params[:merchant_id])
+    @discount = BulkDiscount.find(params[:id])
+
+    if @discount.update(discount_params)
+      redirect_to merchant_bulk_discount_path(params[:merchant_id], params[:id])
+      flash[:success] = "Bulk discount updated successfully"
+    else
+      redirect_to edit_merchant_bulk_discount_path(params[:merchant_id], params[:id])
+      flash[:danger] = "Error: invalid discount, please try again"
+    end
+  end
+
   private
 
   def discount_params

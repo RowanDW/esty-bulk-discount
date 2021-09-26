@@ -24,9 +24,9 @@ RSpec.describe "the bulk discounts index page" do
   it "has a button to edit the discount" do
     visit merchant_bulk_discount_path(@merch1, @discounts[0])
 
-    expect(page).to have_button("Edit Discount")
+    expect(page).to have_button("Update Discount")
 
-    click_button "Edit Discount"
+    click_button "Update Discount"
 
     expect(current_path).to eq(edit_merchant_bulk_discount_path(@merch1, @discounts[0]))
   end

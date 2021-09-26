@@ -5,7 +5,7 @@ RSpec.describe "the bulk discounts index page" do
   before :each do
     @merch = create(:merchant)
 
-    @discount = create(:bulk_discount, merchant: @merch1, percentage: 4, quantity: 4)
+    @discount = create(:bulk_discount, merchant: @merch, percentage: 4, quantity: 4)
   end
 
   it "has a pre-populated form to edit the discount" do
@@ -23,7 +23,7 @@ RSpec.describe "the bulk discounts index page" do
 
     click_button "Submit"
 
-    expect(current_path).to eq(merchant_bulk_discounts_path(@merch))
+    expect(current_path).to eq(merchant_bulk_discount_path(@merch, @discount))
     expect(page).to have_content("Bulk discount updated successfully")
     expect(page).to have_content("20% off ")
     expect(page).to have_content("12 items")

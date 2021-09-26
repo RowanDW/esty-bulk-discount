@@ -3,3 +3,5 @@
 <h1>Bulk Discount <%= @discount.id %> </h1>
 
 <h3><%= @discount.percentage %>% off <%= @discount.quantity %> items</h3>
+
+<%= button_to "Update Discount", edit_merchant_bulk_discount_path(@merchant, @discount), method: :get %>
