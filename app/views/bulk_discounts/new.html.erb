@@ -1,0 +1,10 @@
+<%= form_with model: [@merchant, BulkDiscount.new], method: :post, local: true do |f| %>
+  <%= f.label :percentage, "Percentage" %><br/>
+  <%= f.number_field :percentage %><br/>
+
+  <%= f.label :quantity, "Quantity" %><br/>
+  <%= f.number_field :quantity %><br/>
+
+  <%= f.hidden_field :merchant_id, value: @merchant.id %>
+  <%= f.submit "Submit" %>
+<% end %>
