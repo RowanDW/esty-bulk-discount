@@ -3,11 +3,15 @@
 <h1>My Discounts</h1>
 
 <%= button_to "New Discount", new_merchant_bulk_discount_path(@merchant), method: :get%>
-
+<br>
 <% @merchant.bulk_discounts.each do |discount| %>
   <div id="discount-<%= discount.id %>">
-    <h4>Discount <%= link_to discount.id, merchant_bulk_discount_path(@merchant, discount) %>:
+
+    <h4 style="float: left; width: auto;"><%= link_to "Discount #{discount.id}", merchant_bulk_discount_path(@merchant, discount) %>:
       <%= discount.percentage %>% off
-      <%= discount.quantity %> items </h4>
+      <%= discount.quantity %> items&nbsp;&nbsp;
+    </h4>
+      <%= button_to "Delete discount #{discount.id}", merchant_bulk_discount_path(@merchant, discount), method: :delete %>
+    <br>
   </div>
 <% end %>

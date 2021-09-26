@@ -30,8 +30,8 @@ RSpec.describe "the bulk discounts index page" do
     visit merchant_bulk_discounts_path(@merch1)
 
     within("#discount-#{@discounts[0].id}") do
-      expect(page).to have_link(@discounts[0].id)
-      click_link @discounts[0].id
+      expect(page).to have_link("Discount #{@discounts[0].id}")
+      click_link "Discount #{@discounts[0].id}"
     end
 
     expect(current_path).to eq(merchant_bulk_discount_path(@merch1, @discounts[0]))
@@ -44,5 +44,22 @@ RSpec.describe "the bulk discounts index page" do
     click_button "New Discount"
 
     expect(current_path).to eq(new_merchant_bulk_discount_path(@merch1))
+  end
+
+  it "shows a button to delete each discount" do
+    visit merchant_bulk_discounts_path(@merch1)
+
+    @discounts.each do |discount|
+      within("#discount-#{discount.id}") do
+        expect(page).to have_content("Discount #{discount.id}: ")
+        expect(page).to have_button("Delete discount #{discount.id}")
+      end
+    end
+
+    within("#discount-#{@discounts[0].id}") do
+      click_button "Delete discount #{@discounts[0].id}"
+    end
+
+    expect(page).to_not have_content("Discount #{@discounts[0].id}: ")
   end
 end
