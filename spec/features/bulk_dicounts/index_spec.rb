@@ -43,6 +43,6 @@ RSpec.describe "the bulk discounts index page" do
     expect(page).to have_button("New Discount")
     click_button "New Discount"
 
-    expect(current_path).to eq(new_merchant_bulk_discount(@merch1))
+    expect(current_path).to eq(new_merchant_bulk_discount_path(@merch1))
   end
 end
