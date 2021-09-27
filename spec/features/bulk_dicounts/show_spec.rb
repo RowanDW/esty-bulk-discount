@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "the bulk discounts index page" do
+RSpec.describe "the bulk discounts show page" do
 
   before :each do
     @merch1 = create(:merchant)
