@@ -133,4 +133,11 @@ RSpec.describe "Admin Invoices Show Page" do
       expect(current_path).to eq("/admin/invoices/#{@invoice_1.id}")
     end
   end
+
+  it "displays the total dicounted revenue" do
+    discount = create(:bulk_discount, merchant: @forever_21, percentage: 50, quantity: 3)
+    visit "/admin/invoices/#{@invoice_3.id}"
+
+    expect(page).to have_content("Discounted Revenue: $150.00")
+  end
 end
