@@ -22,11 +22,37 @@ class InvoiceItem < ApplicationRecord
     '%.2f' % (pennies / 100.0)
   end
 
+  def item_rev
+    (unit_price * quantity / 100.0)
+  end
+
   def get_item
     Item.find(item_id)
+  end
+
+  def get_merch
+    item.merchant
   end
 
   def price_dollars(mult = 1)
     '%.2f' % (unit_price * mult / 100.0)
   end
+
+  def apply_discount
+    disc = get_merch.get_discount(self)
+    item_rev * ((100 - disc.percentage) / 100.0)
+  end
+
+  def self.discount_revenue
+    result = self.sum do |ii|
+      merch = ii.get_merch
+      if merch.get_discount(ii).nil?
+        ii.item_rev
+      else
+        ii.apply_discount
+      end
+    end
+    '%.2f' % result
+  end
+
 end

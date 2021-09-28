@@ -8,6 +8,8 @@
   <br>
   <span style="font-size: 20px;"><b style="font-size: 22px;">Total Revenue: </b> $<%= @invoice_items.total_rev %></span>
   <br>
+  <span style="font-size: 20px;"><b style="font-size: 22px;">Discounted Revenue: </b> $<%= @invoice_items.discount_revenue %></span>
+  <br>
   <span style="font-size: 20px;"><b style="font-size: 22px;">Customer: </b> <%= @invoice.customer_name %></span>
   <br>
   <br>
@@ -19,6 +21,7 @@
       <tr>
         <th scope="col">Item</th>
         <th scope="col">Quantity</th>
+        <th scope="col">Discount</th>
         <th scope="col">Price</th>
         <th scope="col">Status</th>
       </tr>
@@ -28,6 +31,11 @@
       <tr id="invoice-item<%= inv.id %>">
         <td><%= inv.get_item.name %></td>
         <td><%= inv.quantity %></td>
+        <% if @merchant.get_discount(inv).nil? %>
+          <td> No Discount</td>
+        <% else %>
+          <td><%= link_to "Discount #{@merchant.get_discount(inv).id}", merchant_bulk_discount_path(@merchant, @merchant.get_discount(inv)) %></td>
+        <% end %>
         <td>$<%= inv.price_dollars(inv.quantity) %></td>
         <td><%= form_with model: [@merchant, inv], local: true do |f| %>
               <%= f.hidden_field :invoice_id, value: @invoice.id %>

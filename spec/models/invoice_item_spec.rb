@@ -70,12 +70,6 @@ RSpec.describe InvoiceItem do
   end
 
 
-  describe ".incomplete_invoices" do
-    it "can display incomplete invoices with items that have not been shipped" do
-      expect(InvoiceItem.incomplete_invoices).to eq([@invoice_3, @invoice_6, @invoice_5, @invoice_1, @invoice1])
-    end
-  end
-
   describe 'class methods' do
     describe '#on_merchant_invoice' do
       it 'returns all invoice items with given invoice and merchant id' do
@@ -96,6 +90,17 @@ RSpec.describe InvoiceItem do
         expect(InvoiceItem.total_rev).to eq('595.00')
       end
     end
+
+    describe '#discount_revenue' do
+      it "return the total revenue with dicounts applied" do
+        @inv_item1.destroy
+        @inv_item2.destroy
+        @inv_item3.destroy
+        discount = create(:bulk_discount, merchant: @zara, percentage: 50, quantity: 2)
+
+        expect(InvoiceItem.discount_revenue).to eq('574.00')
+      end
+    end
   end
 
 
@@ -113,6 +118,34 @@ RSpec.describe InvoiceItem do
         @inv_item1.unit_price = 3330
         expect(@inv_item1.price_dollars).to eq('33.30')
         expect(@inv_item1.price_dollars(2)).to eq('66.60')
+      end
+    end
+
+    describe ".incomplete_invoices" do
+      it "can display incomplete invoices with items that have not been shipped" do
+        expect(InvoiceItem.incomplete_invoices).to eq([@invoice_3, @invoice_6, @invoice_5, @invoice_1, @invoice1])
+      end
+    end
+
+    describe ".item_rev" do
+      it "returns the unit price times quantity" do
+        expect(@invoice_item_1.item_rev).to eq(24.00)
+      end
+    end
+
+    describe '.get_merch' do
+      it "returns the merchant of the item" do
+        expect(@invoice_item_1.get_merch).to eq(@zara)
+        expect(@invoice_item_4.get_merch).to eq(@forever_21)
+      end
+    end
+
+    describe '.apply_discount' do
+      it "return the discounted revenue if the item" do
+        discount = create(:bulk_discount, merchant: @zara, percentage: 50, quantity: 5)
+        @invoice_item_1.update(quantity: 5, unit_price: 100)
+
+        expect(@invoice_item_1.apply_discount).to eq(2.50)
       end
     end
   end
