@@ -72,6 +72,19 @@ RSpec.describe Merchant do
         expect(@merch[0].best_day.last.top_date).to eq('2012-03-26 09:54:09')
       end
     end
+
+    describe 'get_discount' do
+      it "returns the highest applicable discount" do
+        discount1 = create(:bulk_discount, merchant: @merch[0], quantity: 2)
+        discount2 = create(:bulk_discount, merchant: @merch[0], quantity: 1)
+
+        @inv_item1.update(quantity: 2)
+
+        expect(@merch[0].get_discount(@inv_item1).percentage).to eq(discount1.percentage)
+        expect(@merch[0].get_discount(@inv_item2).percentage).to eq(discount2.percentage)
+        expect(@merch[1].get_discount(@inv_item5)).to eq(nil)
+      end
+    end
   end
 
   describe 'top_items' do
