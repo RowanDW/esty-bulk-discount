@@ -75,10 +75,11 @@ RSpec.describe Merchant do
 
     describe 'get_discount' do
       it "returns the highest applicable discount" do
-        discount1 = create(:bulk_discount, merchant: @merch[0], quantity: 2)
-        discount2 = create(:bulk_discount, merchant: @merch[0], quantity: 1)
+        discount1 = create(:bulk_discount, merchant: @merch[0], quantity: 2, percentage: 50)
+        discount2 = create(:bulk_discount, merchant: @merch[0], quantity: 1, percentage: 20)
 
         @inv_item1.update(quantity: 2)
+        @inv_item2.update(quantity: 1)
 
         expect(@merch[0].get_discount(@inv_item1).percentage).to eq(discount1.percentage)
         expect(@merch[0].get_discount(@inv_item2).percentage).to eq(discount2.percentage)
