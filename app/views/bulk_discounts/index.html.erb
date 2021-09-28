@@ -15,3 +15,11 @@
     <br>
   </div>
 <% end %>
+
+
+<div id="holidays">
+  <h3>Upcoming holidays</h3>
+  <% @holidays.each do |hol| %>
+    <p><%= hol.name %>- <%= hol.date %></p>
+  <% end %>
+</div>
