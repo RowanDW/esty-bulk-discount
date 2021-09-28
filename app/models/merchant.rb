@@ -37,4 +37,11 @@ class Merchant < ApplicationRecord
     .order('invoices.updated_at DESC')
     .limit(1)
   end
+
+  def get_discount(ii)
+    bulk_discounts.where('bulk_discounts.quantity <= ?', ii.quantity)
+                  .select('bulk_discounts.*')
+                  .order(percentage: :desc)
+                  .first
+  end
 end
