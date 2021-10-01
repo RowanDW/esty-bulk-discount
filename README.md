@@ -4,6 +4,8 @@
 
 "Little Esty Shop" is a group project to build a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices.
 
+This version includes personal extension work allowing for the application of bulk discounts to items.
+
 ## Learning Goals
 - Practice designing a normalized database schema and defining model relationships.
 - Practice loading csv files to the database.
@@ -41,7 +43,7 @@ This project requires Ruby 2.7.2.
 1. [Evaluation](./doc/evaluation.md)
 
 ## Live App
-[Link to Heroku deployment](https://little-esty-shop-denver.herokuapp.com)
+[Link to Heroku deployment](https://protected-mountain-25344.herokuapp.com/)
 
 ## Tools Used
 
@@ -60,7 +62,8 @@ This project requires Ruby 2.7.2.
 
 ## Contributors
 
+- [Rowan DeLong](https://github.com/RowanDW)
 - [Isika Powers](https://github.com/Isikapowers/)
 - [Ida Olson](https://github.com/idaolson)
 - [Mike "Ozzie" Osmonson](https://github.com/ozzman84)
-- [Rowan DeLong](https://github.com/RowanDW)
+
